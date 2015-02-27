@@ -11,23 +11,28 @@ import requests
 import json
 import bs4
 import os
+import sys
 import urllib2
 
-FLAGS_FILE = 'svg-flags.json'
-FLAGS_DIR = './output'
+import io
+import pprint
+
+COUNTRIES_FILE = 'countries.json'
+OUTPUT_DIR = './output'
 
 # Create the output directory if it doesn't exist.
-if not os.path.exists(FLAGS_DIR):
-    os.makedirs(FLAGS_DIR)
+if not os.path.exists(OUTPUT_DIR):
+    os.makedirs(OUTPUT_DIR)
 
 # Iterate through a list of flag image pages on Wikipedia.
-flags = json.loads(open(FLAGS_FILE).read())
+countries = json.loads(open(COUNTRIES_FILE).read())
 
-print('Downloading %d flags.' % len(flags))
+print('Downloading %d flags.' % len(countries))
 
-for flag in flags:
+for c_code in countries:
     # Request the Wikipedia image detail page and parse it.
-    req = requests.get(flag)
+    country = countries[c_code]
+    req = requests.get(country['url'])
     soup = bs4.BeautifulSoup(req.text)
     
     # Select the <a> tag with the link to the full flag file.
@@ -36,12 +41,15 @@ for flag in flags:
         link = 'http:' + link
     
     # Now download it and store it in our output directory.
-    filename = FLAGS_DIR + '/' + link.split('/')[-1:][0]
+    out_fn = c_code.lower() + '.svg'
+    out_path = OUTPUT_DIR + '/' + urllib2.unquote(out_fn.encode('utf-8'))
+    out_path = unicode(out_path, 'utf-8')
     content = urllib2.urlopen(link)
-
-    print('...`%s\' to `%s\'.' % (link, filename))
     
-    file = open(filename, 'wb')
+    print('...`%s\' for %s.' % (out_path, country['name']))
+    
+    file = open(out_path, 'wb')
     file.write(content.read())
     file.close()
-    break
+
+# All done.
