@@ -8,9 +8,8 @@
 # <https://github.com/github/gitignore/blob/master/Global/Windows.gitignore>
 # <https://github.com/github/gitignore/blob/master/Global/OSX.gitignore>
 
-# Databases and output
+# Databases
 *.db
-output
 
 # Dev-specific personal directories
 _src/
