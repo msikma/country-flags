@@ -14,10 +14,7 @@ import os
 import sys
 import urllib2
 
-import io
-import pprint
-
-COUNTRIES_FILE = 'countries.json'
+COUNTRIES_FILE = 'countries-remote.json'
 OUTPUT_DIR = './output'
 
 # Create the output directory if it doesn't exist.
@@ -44,12 +41,12 @@ for c_code in countries:
     out_fn = c_code.lower() + '.svg'
     out_path = OUTPUT_DIR + '/' + urllib2.unquote(out_fn.encode('utf-8'))
     out_path = unicode(out_path, 'utf-8')
-    content = urllib2.urlopen(link)
+    content = urllib2.urlopen(link).read()
     
     print('...`%s\' for %s.' % (out_path, country['name']))
     
     file = open(out_path, 'wb')
-    file.write(content.read())
+    file.write(content)
     file.close()
 
 # All done.
