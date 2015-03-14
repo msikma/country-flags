@@ -1,23 +1,48 @@
-#  Wikipedia Country Flags
+# country-flags
 
-This repository contains all country flags plus two JSON files—one including
-the Wikimedia Commons link to the flag SVG details page
-(`countries-remote.json`), and one with just the flag information
-(`countries.json`).
+This repository contains all global country flags, plus a JSON file that
+contains the countries' ISO 3166-1 Alpha-2 codes (same as used for domain
+TLDs).
 
-The included `scraper.py` script can download the flags from the Wikimedia
-Commons URLs. To run it, first create a virtualenv and then download the
-requirements:
+An entry in the JSON file contains the following information:
+
+    "mh": {
+      "name": "Marshall Islands",
+      "slug": "marshall-islands",
+      "size": {"width": 570, "height": 300}
+    }
+
+The proper name and slug were taken from Wikipedia. The width and height
+values refer to the proper size of the SVG flag and are meant only to indicate
+the proportion rather than a specific size.
+
+## Scripts
+
+Two scripts are included which you don't need to run unless you want to update
+the repository.
+
+### `svg2png.sh`
+
+Invokes [svgexport](https://www.npmjs.com/package/svgexport) and
+[pngcrush](https://www.npmjs.com/package/pngcrush-bin) to convert the SVG
+images to PNG. (All PNG files are already included in the repository.)
+
+### `scraper.py`
+
+This script can download the flags from the Wikimedia Commons URLs.
+To run it, first create a virtualenv and then download the requirements:
 
     pip install -r requirements.txt
 
 Then simply run:
 
-    ./scraper
+    ./scraper.py
 
 This script is written for Python 2.7.
 
 ## License
 
-The code is MIT licensed. The flag SVG files are in the public domain. See
-the Wikimedia Commons links for more information.
+The code is MIT licensed.
+
+The flag image files were taken from Wikimedia Commons and are in
+the public domain.
