@@ -14,8 +14,8 @@ import os
 import sys
 import urllib2
 
-COUNTRIES_FILE = 'countries-remote.json'
-OUTPUT_DIR = './flags'
+COUNTRIES_FILE = 'flags-remote.json'
+OUTPUT_DIR = '../flags/svg'
 
 # Create the output directory if it doesn't exist.
 if not os.path.exists(OUTPUT_DIR):
