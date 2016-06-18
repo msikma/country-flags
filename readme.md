@@ -1,5 +1,7 @@
 # country-flags
 
+*Note: this is incomplete at the moment and hasn't been updated in a while, so I would recommend you use something else instead.*
+
 This repository contains all global country flags, plus a JSON file that
 contains the countries' ISO 3166-1 Alpha-2 codes (same as used for domain
 TLDs).
